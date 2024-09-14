@@ -50,7 +50,7 @@ python -m pip install -r requirements.txt
 # pip install transformers  # this reinstalled tokenizers 
 
 # Run the following, then move 'c:\users\{my username}\appdata\roaming\nltk' to './venv/'
-python -m nltk.downloader punk_tab -d ./.venv/nltk_data
+python -m nltk.downloader punkt_tab -d ./.venv/nltk_data
 # or
 # python -m nltk.downloader all -d ./.venv/nltk_data
 

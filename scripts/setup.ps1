@@ -18,8 +18,12 @@ if($(read-host("Do dev in the root (y/n)?")).tolower() -eq 'y'){
     ./.venv/scripts/activate.ps1
     pip install build
     pip install pip-tools
-    pip-compile dev-requirements.in
-    pip install -r dev-requirements.txt
+    $env:PYTHON = '.\.venv\scripts\python'
+    ./.venv/scripts/activate.ps1
+    ./.venv/scripts/python -m pip install pip-tools
+    ./.venv/scripts/pip-compile dev-requirements.in
+    ./.venv/scripts/pip install -r dev-requirements.txt
+
     # Use "rustup" from https://rustup.rs/  to install Rust (the officially supported installation method for the Rust compiler)
     $env:RUSTUP_HOME = "d:\users\akrop\.rustup;"
     $env:CARGO_HOME = "d:\users\akrop\.cargo;"
@@ -52,6 +56,10 @@ if($(read-host("Do dev in the root (y/n)?")).tolower() -eq 'y'){
 else{
     # Add the local path to the PYTHONPATH environment variable
     $env:PYTHONPATH = '.'
+    set-location ./app
+    python -m venv .venv
+    $env:PYTHON = '.\.venv\scripts\python'
+
     # For Bash use the following instead:
     # export PYTHONPATH='.'
     # Use "rustup" from https://rustup.rs/  to install Rust (the officially supported installation method for the Rust compiler)
@@ -64,15 +72,13 @@ else{
     # set the following environment variable to the location of the 'nltk_data' directory.
     $env:NLTK_DATA="d:\source\forks\logai\app\.venv\nltk_data"
     
-    set-location ./app
-    python -m venv .venv
     ./.venv/scripts/activate.ps1
-    pip install pip-tools
-    pip-compile requirements.in
-    pip install -r requirements.txt
+    ./.venv/scripts/python -m pip install pip-tools
+    ./.venv/scripts/pip-compile requirements.in
+    ./.venv/scripts/pip install -r requirements.txt
 
     # Run the following, then move 'c:\users\{my username}\appdata\roaming\nltk' to './venv/'
-    python -m nltk.downloader punk_tab -d ./.venv/nltk_data
+    python -m nltk.downloader punkt_tab -d ./.venv/nltk_data
     # or
     # python -m nltk.downloader all -d ./.venv/nltk_data
     if($(test-path ~\AppData\Roaming\nltk)){

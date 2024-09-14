@@ -9,11 +9,12 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html, Input, Output, callback
 
-from app.gui.utils.ui import create_banner, utils
+from gui.utils.ui import create_banner
 from gui.pages import pattern as pattern_page
 from gui.pages import anomaly_detection as anomaly_page
 from gui.pages import clustering as clustering_page
 from gui.callbacks import pattern, anomaly_detection, clustering
+from gui.utils import callback_utils
 
 
 app = dash.Dash(

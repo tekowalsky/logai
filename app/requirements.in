@@ -2,19 +2,14 @@ attr
 cachetools
 cython
 dash
-dash_bootstrap_components
+dash-bootstrap-components
 dataclasses
-# datasets
+datasets
 datetime
-enum
 gensim
-importlib
-itertools
 jinja2
-json
-logging
 salesforce-merlion
-# or salesforce-merlion[all]
+# # or salesforce-merlion[all]
 matplotlib
 nltk
 numba
@@ -22,10 +17,8 @@ numpy
 packaging
 pandas
 pathlib
-pickle
 plotly
 PyYAML
-re
 schema
 scikit-learn
 seaborn
@@ -34,7 +27,5 @@ tokenizers
 torch
 tqdm
 transformers
-ts_datasets
 typing
-urllib
-#yaml
+
