@@ -1,3 +1,81 @@
+Metadata-Version: 2.1
+Name: logai
+Version: 0.1.5
+Summary: LogAI is unified framework for AI-based log analytics
+Author: Qian Cheng, Amrita Saha, Wenzhuo Yang, Chenghao Liu, Gerald Woo, Doyen Sahoo, Steven Hoi
+Author-email: logai@salesforce.com
+License: BSD 3-Clause License
+        
+        Copyright (c) 2023 Salesforce, Inc.
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+        
+        3. Neither the name of Salesforce.com nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        
+Requires-Python: >=3.7.0,<4
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+License-File: license_info.md
+Requires-Dist: schema>=0.7.5
+Requires-Dist: salesforce-merlion>=1.0.0
+Requires-Dist: Cython>=0.29.30
+Requires-Dist: nltk>=3.6.5
+Requires-Dist: gensim>=4.1.2
+Requires-Dist: scikit-learn>=1.0.1
+Requires-Dist: pandas>=1.2.0
+Requires-Dist: numpy>=1.21.4
+Requires-Dist: spacy>=3.2.2
+Requires-Dist: attrs>=21.2.0
+Requires-Dist: dataclasses>=0.6
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: tqdm>=4.62.3
+Requires-Dist: cachetools>=4.2.4
+Requires-Dist: matplotlib>=3.5.1
+Requires-Dist: seaborn>=0.11.2
+Requires-Dist: Jinja2>=3.0.0
+Requires-Dist: numba>=0.56.3
+Provides-Extra: gui
+Requires-Dist: dash-bootstrap-components>=1.2.1; extra == "gui"
+Requires-Dist: plotly>=5.9.0; extra == "gui"
+Requires-Dist: dash>=2.5.1; extra == "gui"
+Provides-Extra: deep-learning
+Requires-Dist: tokenizers>=0.11.6; extra == "deep-learning"
+Requires-Dist: datasets>=1.18.3; extra == "deep-learning"
+Requires-Dist: torch>=1.10.1; extra == "deep-learning"
+Requires-Dist: transformers<=4.23,>=4.17.0; extra == "deep-learning"
+Provides-Extra: dev
+Requires-Dist: Sphinx>=3.5.3; extra == "dev"
+Requires-Dist: docutils>=0.18.1; extra == "dev"
+Requires-Dist: wheel>=0.37.1; extra == "dev"
+Requires-Dist: toml>=0.10.2; extra == "dev"
+Requires-Dist: build>=0.7.0; extra == "dev"
+Requires-Dist: jupyter>=1.0.0; extra == "dev"
+Requires-Dist: ipykernel>=6.16; extra == "dev"
+Requires-Dist: pytest>=6.2.5; extra == "dev"
+Provides-Extra: all
+Requires-Dist: dash-bootstrap-components>=1.2.1; extra == "all"
+Requires-Dist: plotly>=5.9.0; extra == "all"
+Requires-Dist: dash>=2.5.1; extra == "all"
+Requires-Dist: tokenizers>=0.11.6; extra == "all"
+Requires-Dist: datasets>=1.18.3; extra == "all"
+Requires-Dist: torch>=1.10.1; extra == "all"
+Requires-Dist: transformers<=4.23,>=4.17.0; extra == "all"
+Requires-Dist: Sphinx>=3.5.3; extra == "all"
+Requires-Dist: docutils>=0.18.1; extra == "all"
+Requires-Dist: wheel>=0.37.1; extra == "all"
+Requires-Dist: toml>=0.10.2; extra == "all"
+Requires-Dist: build>=0.7.0; extra == "all"
+Requires-Dist: jupyter>=1.0.0; extra == "all"
+Requires-Dist: ipykernel>=6.16; extra == "all"
+Requires-Dist: pytest>=6.2.5; extra == "all"
+
 <!--
 Copyright (c) 2023 Salesforce.com, inc.
 All rights reserved.
@@ -116,7 +194,7 @@ Below we briefly introduce several ways to explore and use LogAI, including expl
 portal, benchmarking deep-learning based log anomaly detection using LogAI, and building your 
 own log analysis application with LogAI.
 
-### Run LogAI GUI Portal locally
+### Explore LogAI GUI Portal 
 
 You can also start a local LogAI service and use the GUI portal to explore LogAI.
 
@@ -126,46 +204,17 @@ You can also start a local LogAI service and use the GUI portal to explore LogAI
 git clone https://github.com/salesforce/logai.git
 cd logai
 
-# Create virtual environment
-python3 -m venv venv
+# [Optional] Create virtual environment
+python3 -m venv venv # create virtual environment
+source venv/bin/activate # activate virtual env
 
-# Add the local path to the PYTHONPATH environment variable
-# For Powershell
-$env:PYTHONPATH = '.'
-# For Bash use the following instead:
-# export PYTHONPATH='.'
-
-# Activate the virtual environment
-# For Powershell
-venv/scripts/activate.ps1
-# For Bash use the following instead:
-# source venv/bin/activate
-
-# Use "rustup" from https://rustup.rs/  to install Rust (the officially supported installation method for the Rust compiler)
-
-# Install requirements that should be installed by the ".[deep-learning]" option
-# Running the following threw an error and failed on "tokenizers"
-# pip install ".[deep-learning]"  
-
-pip install datasets
+# install LogAI and GUI dependencies
 pip install ".[dev]"
 pip install ".[gui]"
-pip install torch
-pip install tokenizers 
-pip install transformers
 
-# Run the following
-python -m nltk.downloader punk_tab -d ./venv/nltk_data
-# or
-# python -m nltk.downloader all -d ./venv/nltk_data
-
-# set the following environment variable to the location of the 'nltk_data' directory.
-$env:NLTK_DATA=".\venv\nltk_data"
-# For Bash
-# export NLTK_DATA ./venv/nltk_data
-
-# Start LogAI service to run locally
-python gui/application.py
+# Start LogAI service
+export PYTHONPATH='.'  # make sure to add current root to PYTHONPATH
+python3 gui/application.py # Run local plotly dash server.
 ```
 
 Then open the LogAI portal via http://localhost:8050/ or http://127.0.0.1:8050/ in your browser:
@@ -176,8 +225,6 @@ The control panel is on the left side of the page. There are three applications 
 Log Summarization, Log Clustering and Anomaly Detection.
 
 #### Control Panel
-
-**Upload Log File**. Select a local file to upload for analysis. 
 
 **File Setting**. You can select the log type and log files to be processed. Now LogAI supports three 
 public datasets: HDFS, BGL and HealthApp. For each log type we included several sample log data. After

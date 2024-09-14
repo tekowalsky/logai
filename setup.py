@@ -26,9 +26,9 @@ extras_require = {
         "dash>=2.5.1",
     ],
     "deep-learning": [
-        "tokenizers>=0.11.6",
         "datasets>=1.18.3",
         "torch>=1.10.1",
+        "tokenizers>=0.11.6",
         "transformers>=4.17.0,<=4.23",
     ],
     "dev": [

@@ -1,0 +1,61 @@
+# Salesforce LogAI installation:
+
+# git clone https://github.com/salesforce/logai.git
+# cd logai
+
+# Add the local path to the PYTHONPATH environment variable
+$env:PYTHONPATH = '.'
+# For Bash use the following instead:
+# export PYTHONPATH='.'
+
+python -m venv .venv
+./.venv/scripts/activate.ps1
+
+# Use "rustup" from https://rustup.rs/  to install Rust (the officially supported installation method for the Rust compiler)
+$check = $(read-host("Have you installed Rust using 'rustup'(y/n)?)).tolower()
+if($check -ne 'y'){
+    throw("You must install Rust using https://rustup.rs/ before continuing.")
+}
+
+python -m pip install pip-tools
+python -m pip-compile dev-requirements.in
+python -m pip install -r dev-requirements.txt
+cd app
+
+# Create a virtual environment
+python -m venv ./app/.venv
+
+# Activate the virtual environment
+./.venv/scripts/activate.ps1
+# For Bash use the following instead:
+# source venv/bin/activate # activate virtual env
+
+# Use "rustup" from https://rustup.rs/  to install Rust (the officially supported installation method for the Rust compiler)
+$env:RUSTUP_HOME = "d:\users\akrop\.rustup;"
+$env:CARGO_HOME = "d:\users\akrop\.cargo;"
+$env:PATH=$env:PATH + 'd:\users\akrop\.cargo\bin;'
+
+# Install requirements that should be installed by the ".[deep-learning]" option
+# Running this command threw an error and failed on "tokenizers"
+# pip install ".[deep-learning]"
+python -m pip install pip-tools
+python -m pip-compile requirements.in
+python -m pip install -r requirements.txt
+
+# pip install datasets
+# pip install ".[dev]"
+# pip install ".[gui]"
+# pip install torch  # this also installs mpath, sympyl, networkx
+# pip install tokenizers 
+# pip install transformers  # this reinstalled tokenizers 
+
+# Run the following, then move 'c:\users\{my username}\appdata\roaming\nltk' to './venv/'
+python -m nltk.downloader punk_tab -d ./.venv/nltk_data
+# or
+# python -m nltk.downloader all -d ./.venv/nltk_data
+
+# set the following environment variable to the location of the 'nltk_data' directory.
+$env:NLTK_DATA="d:\source\forks\logai\app\.venv\nltk_data"
+
+"To start LogAI service locally, enter the following command:"
+"python ./app/application.py"

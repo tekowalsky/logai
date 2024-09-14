@@ -1,0 +1,10 @@
+# Dev requirements - see ./app/requirements.in for app requirements
+-r ./app/requirements.txt
+build
+docutils
+ipykernel
+jupyter
+pytest
+sphinx
+toml
+wheel

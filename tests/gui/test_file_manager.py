@@ -7,7 +7,7 @@
 #
 import os.path
 
-from gui.file_manager import FileManager
+from utils.file_manager import FileManager
 
 TEST_FILE_DIR = os.path.join(os.path.dirname(__file__), "data/HealthApp_format_2000.csv")
 

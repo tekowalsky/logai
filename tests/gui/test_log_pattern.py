@@ -10,7 +10,7 @@ import unittest
 import pandas as pd
 
 from gui.demo.log_pattern import LogPattern
-from gui.pages.utils import create_banner
+from gui.utils.utils import create_banner
 from logai.applications.application_interfaces import WorkFlowConfig, \
     DataLoaderConfig, FeatureExtractorConfig, PreprocessorConfig, \
     LogParserConfig
