@@ -1,10 +1,15 @@
 # Dev requirements - see ./app/requirements.in for app requirements
 -r ./app/requirements.txt
+
 build
 docutils
 ipykernel
 jupyter
+nbsphinx
 pytest
+recommonmark
+setuptools
 sphinx
+sphinx_rtd_theme
 toml
 wheel

@@ -19,13 +19,13 @@ from logai.applications.application_interfaces import (
     LogParserConfig,
 )
 
-from gui.utils.file_manager import FileManager
-from gui.demo.log_pattern import LogPattern
+from ..utils.file_manager import FileManager
+from ..demo.log_pattern import LogPattern
 from logai.dataloader.openset_data_loader import (
     OpenSetDataLoaderConfig,
     OpenSetDataLoader,
 )
-from ..utils.utils import create_param_table
+from ..utils.ui import create_param_table
 
 log_pattern_demo = LogPattern()
 file_manager = FileManager()

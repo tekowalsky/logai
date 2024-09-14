@@ -13,9 +13,9 @@ import pandas as pd
 from dash import html, Input, Output, State, callback, dash_table
 import plotly.express as pxd
 
-from gui.demo.log_pattern import LogPattern
-from gui.demo.log_anomaly import LogAnomaly
-from gui.utils.file_manager import FileManager
+from ..demo.log_pattern import LogPattern
+from ..demo.log_anomaly import LogAnomaly
+from ..utils.file_manager import FileManager
 from logai.analysis.anomaly_detector import AnomalyDetectionConfig
 from logai.applications.application_interfaces import WorkFlowConfig
 from logai.dataloader.openset_data_loader import OpenSetDataLoaderConfig
@@ -26,7 +26,7 @@ from logai.information_extraction.log_vectorizer import VectorizerConfig
 from logai.preprocess.preprocessor import PreprocessorConfig
 
 from logai.utils import constants
-from ..utils.utils import create_param_table
+from ..utils.ui import create_param_table
 
 log_anomaly_demo = LogAnomaly()
 file_manager = FileManager()

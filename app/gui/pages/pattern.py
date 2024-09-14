@@ -8,7 +8,7 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
-from ..utils.utils import (
+from ..utils.ui import (
     create_modal,
     create_description_card,
     create_file_setting_layout,

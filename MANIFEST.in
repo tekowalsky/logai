@@ -1,6 +1,6 @@
-recursive-include logai *.yaml *.json
+recursive-include app/logai *.yaml *.json
 
-recursive-exclude logai/results *
-recursive-exclude logai/data/ *
+recursive-exclude app/logai/results *
+recursive-exclude app/logai/data/ *
 
-include requirements.txt
+include app/requirements.txt
